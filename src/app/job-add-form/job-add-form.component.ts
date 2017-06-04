@@ -10,6 +10,14 @@ export class JobAddFormComponent implements OnInit {
 
   form: FormGroup;
 
+  contractTypes = [
+    { id: 1, name: 'stage', value: 'internship' },
+    { id: 2, name: 'interim', value: 'temp' },
+    { id: 3, name: 'contrat à durée déterminée (CDD)', value: 'fixed-term' },
+    { id: 4, name: 'contrat à durée indéterminée (CDI)', value: 'permanent' },
+    { id: 5, name: 'indépendant', value: 'freelance' }
+  ]
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
