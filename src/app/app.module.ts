@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { JobListComponent } from './job-list/job-list.component';
+import { JobService} from './services/job.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { JobListComponent } from './job-list/job-list.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [JobService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
