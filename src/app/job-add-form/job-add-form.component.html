@@ -29,7 +29,7 @@
 
     <div class="form-group col-sm-6">
       <label for="description">description</label><br>
-      <textarea name="description" cols="30" rows="10"></textarea>
+      <textarea name="description" cols="30" rows="10" formControlName="description"></textarea>
     </div>
 
     <div class="form-group col-sm-6">
@@ -37,10 +37,54 @@
       <select name="contract" formControlName="contract">
         <option *ngFor="let ct of contractTypes" [value]="ct.value">{{ct.name}}</option>
       </select>
-                       
+              
     </div>
     <div class="form-group col-sm-12">
+      <label for="salary">salaire</label>                   
+      <input type="text" 
+              name="salary" 
+              class="small-text" 
+              placeholder="salaire" 
+              formControlName="salary">  
+      <select name="currency" formControlName="currency" class="currency">
+        <option *ngFor="let curr of currencies" [value]="curr.value">{{curr.name}}</option>  
+      </select>           
+    </div>
+
+    <div class="form-group col-sm-6">
+      <label for="experience">expérience</label>    
+      <select name="experience" formControlName="experience">
+        <option *ngFor="let exp of experience" [value]="exp.value">{{exp.name}}</option>
+      </select>      
+      <label for="status">statut</label>          
+      <select name="status" formControlName="status">
+        <option *ngFor="let status of statuses" [value]="status.value">{{status.name}}</option>
+      </select>             
+    </div>
+
+    <div class="form-group col-sm-12">
+      <label for="area">déplacements</label><br>  
+      <div *ngFor="let area of areas">
+        <input type="radio" 
+                [id]='"btn-" + area.value'
+                name="area" 
+                [value]="area.value"
+                formControlName="area"> <label [for]='"btn-" + area.value'>{{area.name}}</label>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <label for="field">secteur</label>    
+      <input type="text"
+              name="field"
+              placeholder="secteur d'activité"
+              formControlName="field"
+      >
+    </div>  
+
+    <div class="form-group col-sm-6">
       <button type="submit" class="btn btn-success">créer l'annonce</button>
     </div>
+
   </form>
 </div>
