@@ -1,5 +1,5 @@
 <div class="panel-body">
-  <form [formGroup]="form" (ngSubmit)="createJob()">
+  <form [formGroup]="form" (ngSubmit)="createJob(form.value)">
     <div class="form-group col-sm-6">
       <label for="title">titre</label>
       <input type="text" 
