@@ -6,7 +6,7 @@
   <div class="panel-body">
     {{job.description}}
   </div>
-  <div class="panel-footer panel-warning clear">parue le {{job.publishdate}}</div>
+  <div class="panel-footer panel-warning clear">parue il y a {{job.publishdate | daysAgo}}</div>
 </div>
 
 <div *ngIf="error">
