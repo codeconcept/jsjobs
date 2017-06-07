@@ -2,9 +2,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 let data = require('./jobs');
-console.log(data.jobs);
 
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 const api = express.Router();
 
