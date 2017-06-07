@@ -1,6 +1,6 @@
 <div class="panel panel-warning" *ngFor="let job of jobs">
   <div class="panel-heading">
-    <h3 class="panel-title">{{job.title}}</h3>
+    <h3 class="panel-title"><a href="#" [routerLink]="['/jobs', job.id]">{{job.title}}</a></h3>
     <div>{{job.company}} - {{job.city}} - {{job.zipcode}}</div>
   </div>
   <div class="panel-body">
