@@ -21,13 +21,18 @@ export class JobService {
   }
 
   addJob(jobData) {
-    console.log('add job');
     jobData.id = Date.now();
     return this.http.post(this.BASE_URL + 'api/jobs', jobData)
               .map(res => {         
                 console.log(res);       
                 this.jobsSubject.next(jobData);
               });
+             
+  }
+
+  getJob(id) {
+    return this.http.get(this.BASE_URL + `api/jobs/${id}`)
+                    .map(res => res.json());
   }
 
 }
