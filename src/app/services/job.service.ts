@@ -16,29 +16,18 @@ export class JobService {
   constructor(private http: Http) { }
 
   getJobs() {    
-    if(this.jobs.length > 0 && this.initialJobs.length > 0) {
-      console.log('case if ', this.jobs);
-      return Observable.of([...this.jobs, ...this.initialJobs]);
-    } else if(this.jobs.length > 0 && this.initialJobs.length === 0) {
-      console.log('case else if');
-      return this.http.get(this.BASE_URL + 'api/jobs')
-                .map(res => res.json())
-                .do(data => {
-                  this.initialJobs = data;
-                  this.jobs = [...this.jobs, ...this.initialJobs]
-                });
-    } else {
-      console.log('case else');
-      return this.http.get(this.BASE_URL + 'api/jobs')
-                .map(res => res.json())
-                .do(data => this.initialJobs = data);
-    }
+    return this.http.get(this.BASE_URL + 'api/jobs')
+                .map(res => res.json());
   }
 
   addJob(jobData) {
+    console.log('add job');
     jobData.id = Date.now();
-    this.jobs = [jobData, ...this.jobs];
-    return this.jobsSubject.next(jobData);
+    return this.http.post(this.BASE_URL + 'api/jobs', jobData)
+              .map(res => {         
+                console.log(res);       
+                this.jobsSubject.next(jobData);
+              });
   }
 
 }
