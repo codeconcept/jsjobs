@@ -54,8 +54,8 @@ exports.jobs = [
     "lastupdate": "06/04/2017"
   },
   {
-    "id": 3,
-    "title": "Développeur Angular",
+    "id": 4,
+    "title": "Développeur Angular 2 et 4",
     "company": "Palindrome",
     "city": "Laval",
     "zipcode": 53000,
