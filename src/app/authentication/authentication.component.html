@@ -1,0 +1,17 @@
+<div>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+    <input type="text"
+            class="login-input" 
+            ngModel 
+            name="email" 
+            placeholder="email " 
+            required>
+    <input type="password" 
+            class="login-input"
+            ngModel 
+            name="password" 
+            placeholder="mot de passe" 
+            required>
+    <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">se connecter</button>
+  </form>
+</div>
