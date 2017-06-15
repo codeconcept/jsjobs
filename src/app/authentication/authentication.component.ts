@@ -20,7 +20,7 @@ export class AuthenticationComponent implements OnInit {
   }  
 
   refreshFlags() {
-    if(localStorage.getItem('jbb-data')) {
+    if(this.authService.userIsLoggedIn()) {
       this.isAuthenticated = true;
       this.welcomeMessage = 'Bienvenue';
       this.jbbData = JSON.parse(localStorage.getItem('jbb-data'));
