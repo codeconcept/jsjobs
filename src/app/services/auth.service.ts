@@ -22,7 +22,9 @@ export class AuthService {
   }
 
   register(credentials) {
-    console.log('register credentials: ', credentials);
+    // console.log('register credentials: ', credentials);
+    return this.http.post(this.BASE_URL + 'register', credentials)
+                    .map(res => res.json());
   }
 
 }

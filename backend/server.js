@@ -7,7 +7,7 @@ let initialJobs = data.jobs;
 let addedJobs = [];
 
 let users = [];
-const fakeUser = {email: 'tu@test.fr', password: 'aze' };
+const fakeUser = {id: 1, email: 'tu@test.fr', password: 'aze' };
 const secret = 'qsdjS12ozehdoIJ123DJOZJLDSCqsdeffdg123ER56SDFZedhWXojqshduzaohduihqsDAqsdq';
 
 const jwt = require('jsonwebtoken');
@@ -40,6 +40,18 @@ auth.post('/login', (req, res) => {
     }
   } else {
     res.json({ success: false, message: 'données manquantes'});
+  }
+});
+
+auth.post('/register', (req, res) => {
+  console.log('req.body ', req.body);
+  if(req.body) {
+    const email = req.body.email.toLocaleLowerCase().trim();
+    const password = req.body.password.toLocaleLowerCase().trim();
+    users = [{id: Date.now(), email: email, password: password}, ...users];
+    res.json({ success: true, users: users });
+  } else {
+    res.json({ success: false, message: 'la création a échoué'});
   }
 });
 
