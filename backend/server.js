@@ -7,7 +7,7 @@ let initialJobs = data.jobs;
 let addedJobs = [];
 
 let users = [];
-const fakeUser = {email: 'sm@test.fr', password: 'aze' };
+const fakeUser = {email: 'tu@test.fr', password: 'aze' };
 const secret = 'qsdjS12ozehdoIJ123DJOZJLDSCqsdeffdg123ER56SDFZedhWXojqshduzaohduihqsDAqsdq';
 
 const jwt = require('jsonwebtoken');
@@ -33,7 +33,7 @@ auth.post('/login', (req, res) => {
     const email = req.body.email.toLocaleLowerCase();
     const password = req.body.password.toLocaleLowerCase();
     if(email === fakeUser.email && password === fakeUser.password) {
-      const token = jwt.sign({ iss: 'http://localhost:4201', role: 'admin'}, secret);
+      const token = jwt.sign({ iss: 'http://localhost:4201', role: 'admin', email: req.body.email}, secret);
       res.json({ success: true, token: token});
     } else {
       res.json({ success: false, message : 'indentifiants incorrects' });
