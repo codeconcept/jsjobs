@@ -19,6 +19,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { AuthService } from './services/auth.service';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { RegisterComponent } from './register/register.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes = [
   { path: '', component: HomeComponent},
@@ -28,6 +29,7 @@ const routes = [
   { path: 'about', component: AboutComponent},
   { path: 'login', component: AuthenticationComponent},
   { path: 'register', component: RegisterComponent},
+  { path: 'profile', component: UserProfileComponent},
 ]
 
 @NgModule({
@@ -44,7 +46,8 @@ const routes = [
     ToMoneySymbolPipe,
     SearchResultComponent,
     AuthenticationComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@ let initialJobs = data.jobs;
 let addedJobs = [];
 
 let users = [];
-const fakeUser = {id: 1, email: 'tu@test.fr', password: 'aze' };
+const fakeUser = {id: 1, email: 'tu@test.fr', nickname:'Tutu', password: 'aze' };
 const secret = 'qsdjS12ozehdoIJ123DJOZJLDSCqsdeffdg123ER56SDFZedhWXojqshduzaohduihqsDAqsdq';
 
 const jwt = require('jsonwebtoken');
@@ -48,6 +48,7 @@ auth.post('/register', (req, res) => {
   if(req.body) {
     const email = req.body.email.toLocaleLowerCase().trim();
     const password = req.body.password.toLocaleLowerCase().trim();
+    const nickname = req.body.nickname.trim();
     users = [{id: Date.now(), email: email, password: password}, ...users];
     res.json({ success: true, users: users });
   } else {

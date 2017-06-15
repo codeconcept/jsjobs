@@ -1,0 +1,9 @@
+<div *ngIf="decodedToken">
+  <pre>
+    {{ decodedToken | json }}
+  </pre>
+</div>
+
+<div *ngIf="!decodedToken">
+  Aucune donnée trouvée.
+</div>

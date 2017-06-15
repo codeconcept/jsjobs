@@ -11,7 +11,8 @@ export class AuthenticationComponent implements OnInit {
 
   isAuthenticated = false;
   welcomeMessage = '';
-  jbbData = null;
+  jbbToken = null;
+  JBB_TOKEN_NAME = 'jbb-token';
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -23,7 +24,10 @@ export class AuthenticationComponent implements OnInit {
     if(this.authService.userIsLoggedIn()) {
       this.isAuthenticated = true;
       this.welcomeMessage = 'Bienvenue';
-      this.jbbData = JSON.parse(localStorage.getItem('jbb-data'));
+      const jbbToken = JSON.parse(localStorage.getItem(this.JBB_TOKEN_NAME));
+      console.log('jbbToken: ', jbbToken);
+      this.jbbToken = this.authService.decodeToken(jbbToken.token);
+      console.log('jbbToken: ', this.jbbToken);
     }
   }
   
@@ -42,9 +46,9 @@ export class AuthenticationComponent implements OnInit {
 
   handleLoginSuccess(data) {
     console.log('success: ', data);
-    this.jbbData = data;
-    localStorage.setItem('jbb-data', JSON.stringify(data));
-    this.router.navigate(['/']);
+    this.jbbToken = data;
+    localStorage.setItem(this.JBB_TOKEN_NAME, JSON.stringify(data));
+    this.router.navigate(['/profile']);
   }
 
   handleLoginFailure(error) {
