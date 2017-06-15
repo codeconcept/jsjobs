@@ -6,6 +6,11 @@ let data = require('./jobs');
 let initialJobs = data.jobs;
 let addedJobs = [];
 
+let users = [];
+const fakeUser = {email: 'sm@test.fr', password: 'aze' };
+
+const jwt = require('jsonwebtoken');
+
 const getAllJobs = () => {
     return [...addedJobs, ...initialJobs];  
 }
@@ -19,6 +24,22 @@ app.use((req, res, next) => {
 });
 
 const api = express.Router();
+const auth = express.Router();
+
+auth.post('/login', (req, res) => {
+  // console.log('req.body ', req.body);
+  if(req.body) {
+    const email = req.body.email.toLocaleLowerCase();
+    const password = req.body.password.toLocaleLowerCase();
+    if(email === fakeUser.email && password === fakeUser.password) {
+      res.json({ success: true, data: req.body});
+    } else {
+      res.json({ success: false, message : 'indentifiants incorrects' });
+    }
+  } else {
+    res.json({ success: false, message: 'données manquantes'});
+  }
+});
 
 api.get('/jobs', (req, res) => {
   res.json(getAllJobs());
@@ -55,6 +76,7 @@ api.get('/jobs/:id', (req, res) => {
 });
 
 app.use('/api', api);
+app.use('/auth', auth);
 
 const port = 4201;
 app.listen(port, () => {
