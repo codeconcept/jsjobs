@@ -14,11 +14,11 @@
         <li>
           <a href="#"class="" routerLink="/about">à propos</a>
         </li>
-        <li>
+        <li *ngIf="!authService.userIsLoggedIn()">
           <a href="#" class="" routerLink="/login">se connecter</a>
         </li>
-        <li>
-          <a href="#" class="" routerLink="/logout">se déconnecter</a>
+        <li *ngIf="authService.userIsLoggedIn()">
+          <a href="#" class="" (click)="authService.logOut()">se déconnecter</a>
         </li>        
         <li>
           <a href="#" class="" routerLink="/register">créer un compte</a>

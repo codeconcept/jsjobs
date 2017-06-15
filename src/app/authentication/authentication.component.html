@@ -23,3 +23,7 @@
     {{ jbbData | json }}
   </pre>
 </div>
+
+<div *ngIf="isAuthenticated">
+  <a href="#" routerLink="/logout"></a>
+</div>

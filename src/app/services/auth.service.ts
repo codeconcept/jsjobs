@@ -13,4 +13,12 @@ export class AuthService {
               .map(res => res.json());
   }
 
+  userIsLoggedIn() {
+    return localStorage.getItem('jbb-data');
+  }
+
+  logOut() {
+    localStorage.removeItem('jbb-data');
+  }
+
 }
