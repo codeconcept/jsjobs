@@ -6,7 +6,10 @@ let data = require('./jobs');
 let initialJobs = data.jobs;
 let addedJobs = [];
 
-let users = [{id: 1, email: 'tu@test.fr', nickname:'Tutu', password: 'aze' }];
+let users = [
+  {id: 1, email: 'tu@test.fr', nickname:'Tutu', password: 'aze', role: 'admin' },
+  {id: 2, email: 'tu2@test.fr', nickname:'Tutu2', password: 'qsd', role: 'user' }  
+];
 // const fakeUser = {id: 1, email: 'tu@test.fr', nickname:'Tutu', password: 'aze' };
 const secret = 'qsdjS12ozehdoIJ123DJOZJLDSCqsdeffdg123ER56SDFZedhWXojqshduzaohduihqsDAqsdq';
 
@@ -28,7 +31,6 @@ const api = express.Router();
 const auth = express.Router();
 
 auth.post('/login', (req, res) => {
-  // console.log('req.body ', req.body);
   if(req.body) {
     const email = req.body.email.toLocaleLowerCase();
     const password = req.body.password.toLocaleLowerCase();
@@ -36,8 +38,13 @@ auth.post('/login', (req, res) => {
     console.log('index ', index);
     console.log('user ', users[index]);
     if(index > -1 && users[index].password === password) {
-      let user = users[index]; console.log('index', index);
-      const token = jwt.sign({ iss: 'http://localhost:4201', role: 'admin', email: req.body.email}, secret);
+      let user = users[index]; 
+      let token = '';
+      if(user.email === 'tu@test.fr') {
+        token = jwt.sign({ iss: 'http://localhost:4201', role: 'admin', email: req.body.email}, secret);
+      } else {
+        token = jwt.sign({ iss: 'http://localhost:4201', role: 'user', email: req.body.email}, secret);
+      }
       res.json({ success: true, token: token});
     } else {
       res.status(401).json({ success: false, message : 'identifiants incorrects' });

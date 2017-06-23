@@ -7,3 +7,11 @@
 <div *ngIf="!decodedToken">
   Aucune donnée trouvée.
 </div>
+
+<div *ngIf="isAdmin">
+  Je suis tout puissant !
+</div>
+
+<div *ngIf="!isAdmin">
+  Je suis un utilisateur de base.
+</div>
