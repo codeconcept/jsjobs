@@ -26,7 +26,12 @@ export class UserProfileComponent implements OnInit {
         this.isAdmin = true;
       }
       this.userEmail = this.decodedToken.email;
-      this.loadAds(this.userEmail);
+      // admin needs to see all ads
+      if(this.isAdmin) {
+        this.loadAdsWithoutFilter();
+      } else {
+        this.loadAds(this.userEmail);
+      }
     }
   }
 
@@ -34,6 +39,14 @@ export class UserProfileComponent implements OnInit {
     this.jobService.getJobsByUserEmail(userEmail)
                     .subscribe(
                       data => this.displayAds(data.jobs),
+                      err => console.error(err)
+                    )
+  }
+
+  loadAdsWithoutFilter() {
+    this.jobService.getJobs()
+                    .subscribe(
+                      data => this.displayAds(data), // directly return an array
                       err => console.error(err)
                     )
   }
