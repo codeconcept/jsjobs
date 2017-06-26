@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
 
@@ -86,16 +86,22 @@ const checkUserToken = (req, res, next) => {
     return res.status(401).json({ success: false, message: "Header d'authentification manquant"});
   }
 
-  const authorizationHeaderParts = req.header('authorization').toLocaleLowerCase().split(' ');
+  const authorizationHeaderParts = req.header('authorization').split(' ');
+  // parts are 'Bearer theToken'
   let token = authorizationHeaderParts[1];
-  const decodedToken = jwt.verify(token, secret);
-  console.log('decodedToken ', decodedToken);
-  next();
+  jwt.verify(token, secret, (err, decodedToken) => {
+    if(err) {
+      return res.status(401).json({ success: false, message: "Token non valide"});      
+    } else {
+      console.log('decodedToken ', decodedToken);
+      next();
+    }
+  });
 };
 
 api.post('/jobs', checkUserToken, (req, res) => {
   const job = req.body;
-  console.log(job);
+  console.log('received job on POST to /jobs', job);
   addedJobs = [job, ...addedJobs];
   res.json(job);
 });

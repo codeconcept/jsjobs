@@ -25,9 +25,6 @@ export class AuthenticationComponent implements OnInit {
       this.isAuthenticated = true;
       this.welcomeMessage = 'Bienvenue';
       const jbbToken = JSON.parse(localStorage.getItem(this.JBB_TOKEN_NAME));
-      console.log('jbbToken: ', jbbToken);
-      this.jbbToken = this.authService.decodeToken(jbbToken.token);
-      console.log('jbbToken: ', this.jbbToken);
     }
   }
   

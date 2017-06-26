@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import * as jwtDecode from 'jwt-decode';
 
 @Injectable()
@@ -22,6 +22,7 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem(this.TOKEN_NAME);
+    localStorage.removeItem('token');
   }
 
   register(credentials) {
@@ -32,6 +33,13 @@ export class AuthService {
 
   decodeToken(token) {
     return jwtDecode(token);
+  }
+
+  addAuthorizationHeader(token) {
+    const authorizationHeader = new Headers({
+      'Authorization': 'Bearer ' + token
+    });
+    return new RequestOptions({ headers: authorizationHeader });
   }
 
 }
