@@ -71,6 +71,13 @@ api.get('/jobs', (req, res) => {
   res.json(getAllJobs());
 });
 
+api.get('/jobs/:email', (req, res) => {
+  // res.json({success: true, message: 'GET on jobs/:email works'});
+  const email = req.params.email;
+  const jobs = getAllJobs().filter(job => job.email === email);
+  res.json({ success: true, jobs: jobs});
+});
+
 api.post('/jobs', (req, res) => {
   const job = req.body;
   console.log(job);
