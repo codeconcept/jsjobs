@@ -41,9 +41,9 @@ auth.post('/login', (req, res) => {
       let user = users[index]; 
       let token = '';
       if(user.email === 'tu@test.fr') {
-        token = jwt.sign({ iss: 'http://localhost:4201', role: 'admin', email: req.body.email}, secret);
+        token = jwt.sign({ iss: 'http://localhost:4201', role: 'admin', email: req.body.email, nickname: user.nickname}, secret);
       } else {
-        token = jwt.sign({ iss: 'http://localhost:4201', role: 'user', email: req.body.email}, secret);
+        token = jwt.sign({ iss: 'http://localhost:4201', role: 'user', email: req.body.email, nickname: user.nickname}, secret);
       }
       res.json({ success: true, token: token});
     } else {

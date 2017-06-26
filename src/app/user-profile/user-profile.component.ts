@@ -24,4 +24,8 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  loadAds(user) {
+    
+  }
+
 }

@@ -9,9 +9,9 @@
 </div>
 
 <div *ngIf="isAdmin">
-  Je suis tout puissant !
+  <h2>Profil de {{decodedToken.nickname}}</h2>
 </div>
 
 <div *ngIf="!isAdmin">
-  Je suis un utilisateur de base.
+  <h2>Profil de {{decodedToken.nickname}}</h2>
 </div>

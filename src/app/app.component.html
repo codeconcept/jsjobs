@@ -18,7 +18,7 @@
           <a href="#" class="" routerLink="/login">se connecter</a>
         </li>
         <li *ngIf="authService.userIsLoggedIn()">
-          <a href="#" class="" routerLink="/profile">mon profile</a>
+          <a href="#" class="" routerLink="/profile">mon profil</a>
         </li>         
         <li *ngIf="authService.userIsLoggedIn()">
           <a href="#" class="" (click)="authService.logOut()">se déconnecter</a>
