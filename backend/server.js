@@ -60,7 +60,7 @@ auth.post('/register', (req, res) => {
     const email = req.body.email.toLocaleLowerCase().trim();
     const password = req.body.password.toLocaleLowerCase().trim();
     const nickname = req.body.nickname.trim();
-    users = [{id: Date.now(), email: email, password: password}, ...users];
+    users = [{id: Date.now(), email: email, password: password, nickname: nickname}, ...users];
     res.json({ success: true, users: users });
   } else {
     res.json({ success: false, message: 'la création a échoué'});
