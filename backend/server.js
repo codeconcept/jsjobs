@@ -27,6 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
+
 const api = express.Router();
 const auth = express.Router();
 
@@ -78,7 +79,21 @@ api.get('/jobs/:email', (req, res) => {
   res.json({ success: true, jobs: jobs});
 });
 
-api.post('/jobs', (req, res) => {
+const checkUserToken = (req, res, next) => {
+  // check that the user sent a token in the request header
+  if(!req.header('authorization')) {
+    // no header, no need to go further
+    return res.status(401).json({ success: false, message: "Header d'authentification manquant"});
+  }
+
+  const authorizationHeaderParts = req.header('authorization').toLocaleLowerCase().split(' ');
+  let token = authorizationHeaderParts[1];
+  const decodedToken = jwt.verify(token, secret);
+  console.log('decodedToken ', decodedToken);
+  next();
+};
+
+api.post('/jobs', checkUserToken, (req, res) => {
   const job = req.body;
   console.log(job);
   addedJobs = [job, ...addedJobs];

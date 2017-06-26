@@ -1,4 +1,4 @@
-<div class="panel-body">
+<div class="panel-body" *ngIf="userIsLoggedin">
   <form [formGroup]="form" (ngSubmit)="createJob(form.value)">
     <div class="form-group col-sm-6">
       <label for="title">titre</label>
@@ -95,4 +95,14 @@
     </div>
 
   </form>
+</div>
+
+<div *ngIf="!userIsLoggedin">
+  <h2>Création d'annonce réservé aux utilisateurs inscrits</h2>
+  <div>
+    Vous devez être connecté pour créer une annonce.
+    <br>
+    <a href="#" class="" routerLink="/login">se connecter</a> ou
+    <a href="#" class="" routerLink="/register">créer un compte</a>
+  </div>
 </div>
