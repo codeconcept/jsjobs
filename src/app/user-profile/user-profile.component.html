@@ -11,6 +11,15 @@
 
 <div *ngIf="isAdmin">
   <h2>Profil de {{decodedToken.nickname}}</h2>
+  <div *ngFor="let job of jobs">
+    <strong>{{job.title}}</strong> 
+    - publiée il y a {{job.publishdate | daysAgo}} 
+    - mise à jour il y a {{ job.lastupdate | daysAgo}}
+    <div>
+      {{job.description | truncate}}
+    </div>
+    <hr>
+  </div>
 </div>
 
 <div *ngIf="!isAdmin">
@@ -22,7 +31,7 @@
     - publiée il y a {{job.publishdate | daysAgo}} 
     - mise à jour il y a {{ job.lastupdate | daysAgo}}
     <div>
-      {{job.description}}
+      {{job.description | truncate : 10}}
     </div>
     <hr>
   </div>

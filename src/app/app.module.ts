@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 const routes = [
   { path: '', component: HomeComponent},
@@ -47,7 +48,8 @@ const routes = [
     SearchResultComponent,
     AuthenticationComponent,
     RegisterComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
