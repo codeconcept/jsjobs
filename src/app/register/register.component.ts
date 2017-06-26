@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
   }
 
   handleRegisterSuccess(data) {
-    console.log('success: ', data);
+    // console.log('success: ', data);
     this.router.navigate(['/']);
   }
 

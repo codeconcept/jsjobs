@@ -12,6 +12,8 @@ export class UserProfileComponent implements OnInit {
   decodedToken = null;
   isAdmin = false;
   userEmail = '';
+  jobs = [];
+  adsTitle = '';
 
   constructor(private authService:AuthService, private jobService: JobService) { }
 
@@ -31,9 +33,24 @@ export class UserProfileComponent implements OnInit {
   loadAds(userEmail) {
     this.jobService.getJobsByUserEmail(userEmail)
                     .subscribe(
-                      data => console.log(data),
+                      data => this.displayAds(data.jobs),
                       err => console.error(err)
                     )
+  }
+
+  displayAds(jobs) {
+    console.log('jobs ', jobs);
+    this.jobs = jobs;
+    switch(this.jobs.length) {
+      case 0:
+        this.adsTitle = 'Aucune annonce postée à ce jour';
+        return;
+      case 1:
+        this.adsTitle = '1 annonce postée';
+        return;
+      default:
+        this.adsTitle = `${this.jobs.length} annonces postées`;
+    }
   }
 
 }

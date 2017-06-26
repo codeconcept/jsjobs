@@ -1,4 +1,5 @@
 <div *ngIf="decodedToken">
+  <strong> Contenu du token</strong>
   <pre>
     {{ decodedToken | json }}
   </pre>
@@ -14,4 +15,15 @@
 
 <div *ngIf="!isAdmin">
   <h2>Profil de {{decodedToken.nickname}}</h2>
+
+  <h3>{{adsTitle}}</h3>
+  <div *ngFor="let job of jobs">
+    <strong>{{job.title}}</strong> 
+    - publiée il y a {{job.publishdate | daysAgo}} 
+    - mise à jour il y a {{ job.lastupdate | daysAgo}}
+    <div>
+      {{job.description}}
+    </div>
+    <hr>
+  </div>
 </div>
